@@ -1,0 +1,166 @@
+<div class="container">
+    <div class="d-flex justify-content-center" *ngIf="isloading">
+    <div class="spinner-grow text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    </div>
+    <div class="row" *ngIf="ifError && !isloading">
+        <div class="alert alert-danger" role="alert">{{errorMessage}}</div>`
+    </div>
+        <div class="row" *ngIf="!ifError && !isloading">
+            <div class="col-md-2">
+                <a class="btn btn-primary" data-bs-toggle="collapse" href="#allcountries" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    All Countries
+                  </a>
+            </div>
+            <div class="col-md-2">
+                <a class="btn btn-primary" data-bs-toggle="collapse" href="#states" role="button" aria-expanded="false" aria-controls="collapseExample">
+                   Country states
+                  </a>
+            </div>
+            <div class="col-md-2">
+                <a class="btn btn-primary" data-bs-toggle="collapse" href="#currencies" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    All currencies
+                  </a>
+            </div>
+            <div class="col-md-2">
+                <a class="btn btn-primary" data-bs-toggle="collapse" href="#singlecurrency" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    get currency
+                  </a>
+            </div>
+            <div class="col-md-2">
+                <a class="btn btn-primary" data-bs-toggle="collapse" href="#getcities" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    get City
+                  </a>
+            </div>
+            <div class="col-md-2">
+                <a class="btn btn-primary" data-bs-toggle="collapse" href="#getstatus" role="button" aria-expanded="false" aria-controls="collapseExample">
+                   get Status
+                  </a>
+            </div>
+        </div><br>
+      <div class="collapse" id="allcountries">
+        <div class="card card-header">
+         All Countries
+        </div>
+        <div class="card card-body">
+            <table class="table">
+                <tr>
+                    <th>ID</th><th>Country Name</th><th>Delete</th>
+                </tr>
+                <tr *ngFor="let country of Allcountries.data">
+                    <td>{{country.countryid}}</td><td>{{country.countryname}}</td>
+                    <td><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                </tr>
+            </table>
+        </div>
+      </div>
+      <br>
+      <div class="collapse" id="states">
+        <div class="card card-header">
+         States by Countries
+        </div>
+        <div class="card card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <select #cntry class="form-select" aria-label="Default select example">
+                        <option selected>select country</option>
+                        <option *ngFor="let country of Allcountries.data" value="{{country.countryid}}">{{country.countryname}}</option>
+                      </select>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-info" (click)="myFunc(cntry.value)">search</button>
+                </div>
+            </div>
+            <br>
+            <table class="table">
+                <tr>
+                    <th>ID</th><th>State Name</th><th>Delete</th>
+                </tr>
+                <tr *ngFor="let state of Allstate.data">
+                    <td>{{state.stateid}}</td><td>{{state.statename}}</td>
+                    <td><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                </tr>
+            </table>
+        </div>
+      </div><br>
+      <div class="collapse" id="currencies">
+        <div class="card card-header">
+         All Currencies
+        </div>
+        <div class="card card-body">
+            <table class="table">
+                <tr>
+                    <th>ID</th><th>Currency Name</th><th>Delete</th>
+                </tr>
+                <tr *ngFor="let curr of Allcurrencies.data">
+                    <td>{{curr.currencyid}}</td><td>{{curr.currency_code}}</td>
+                    <td><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                </tr>
+            </table>
+        </div>
+      </div>
+      <br>
+      <div class="collapse" id="singlecurrency">
+        <div class="card card-header">
+         get Currency
+        </div>
+        <div class="card card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <select #scntry class="form-select" aria-label="Default select example">
+                        <option selected>select country</option>
+                        <option *ngFor="let country of Allcountries.data" value="{{country.countryid}}">{{country.countryname}}</option>
+                      </select>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-info" (click)="getcurrency(scntry.value)">search</button>
+                </div>
+            </div>
+            <br>
+            <table class="table">
+                <tr>
+                    <th>ID</th><th>Currency Name</th><th>Delete</th>
+                </tr>
+                <tr *ngFor="let curr of SingleCurrency.data">
+                    <td>{{curr.currencyid}}</td><td>{{curr.currency_code}}</td>
+                    <td><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                </tr>
+            </table>
+        </div>
+      </div><br>
+      <div class="collapse" id="getcities">
+        <div class="card card-header">
+         get city
+        </div>
+        <div class="card card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <select #countryid class="form-select" aria-label="Default select example" (change)="myFunc(countryid.value)">
+                        <option selected>select country</option>
+                        <option *ngFor="let country of Allcountries.data" value="{{country.countryid}}">{{country.countryname}}</option>
+                      </select>
+                </div>
+                <div class="col-md-4">
+                    <select #stateid class="form-select" aria-label="Default select example">
+                        <option selected>select state</option>
+                        <option *ngFor="let state of Allstate.data" value="{{state.stateid}}">{{state.statename}}</option>
+                      </select>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-info" (click)="getcity(countryid.value,stateid.value)">search</button>
+                </div>
+            </div>
+            <br>
+            <table class="table">
+                <tr>
+                    <th>ID</th><th>State Name</th><th>Delete</th>
+                </tr>
+                <tr *ngFor="let city of Allcities.data">
+                    <td>{{city.cityid}}</td><td>{{city.cityname}}</td>
+                    <td><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+                </tr>
+            </table>
+        </div>
+      </div><br>
+</div>

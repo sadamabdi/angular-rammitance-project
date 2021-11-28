@@ -1,0 +1,95 @@
+<div class="container-fluid bg-light py-3">
+    <div class="row text-center">
+        <h3>All Users</h3>
+    </div>
+</div>
+<div *ngIf="isLoading" class="d-flex justify-content-center my-5">
+    <div class="spinner-grow" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+  <div class="container-fluid my-5">
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" (click)="Addbutton()" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add New User</button>
+            </div>
+        </div><br><br>
+        <div id="response">
+
+        </div>
+        <div class="row">
+          <table>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Action</th>
+            </tr>
+            <tr *ngFor="let users of allUsers.data">
+              <td>{{users.fullname}}</td>
+              <td>{{users.email}}</td>
+              <td>
+                <button class="btn btn-success" (click)="updateUser(users)" style="margin-right: 10px;"><i class="fa fa-edit"></i></button>
+                <button class="btn btn-danger" (click)="deleteUser(users)"><i class="fa fa-trash"></i></button>
+              </td>
+            </tr>
+          </table>
+        </div>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" #myModal aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="userForm"  (ngSubmit)="addUser()">
+          <input type="text" hidden formControlName="userid">
+        <div class="modal-body">
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Full Name</label>
+                          <input type="text" class="form-control" placeholder="full name" formControlName="fullname">
+                          <span class="text-danger" *ngIf="isSubmitted && userForm.get('fullname')?.hasError('required')">fullname  required </span>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>email</label>
+                        <input type="email" class="form-control" placeholder="email" formControlName="email">
+                        <span class="text-danger" *ngIf="isSubmitted && userForm.get('email')?.hasError('required')">email  required </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="pass">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>password</label>
+                        <input type="password" class="form-control" placeholder="password" formControlName="password">
+                        <span class="text-danger" *ngIf="isSubmitted && userForm.get('password')?.hasError('required')">password  required </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="text" hidden  id="action">
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" id="add" class="btn btn-primary">Add</button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
+
+
+
+  

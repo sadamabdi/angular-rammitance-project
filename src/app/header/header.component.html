@@ -1,0 +1,38 @@
+<!-- Nav bar starts here -->
+<nav class="navbar navbar-expand-lg navbar-light px-3">
+    <a class="navbar-brand" routerLink="">
+        <img src="https://datatopics.worldbank.org/sdgatlas/goal-17-partnerships-for-the-goals/static/media/sdg17.517e590d.png" class="d-inline-block align-top logo" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/" routerLinkActive='active-link' [routerLinkActiveOptions]="{exact: true}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item" *ngIf="isok" routerLinkActive='active-link'>
+                <a class="nav-link" routerLink="/allusers">All Users</a>
+            </li>
+            <li class="nav-item" *ngIf="isok" routerLinkActive='active-link'> 
+                <a class="nav-link" routerLink="/operation">operations</a>
+            </li>
+            <li class="nav-item" *ngIf="iscustomer" routerLinkActive='active-link'> 
+                <a class="nav-link" routerLink="/sendmoney">Send Money</a>
+            </li>
+
+            <li class="nav-item" *ngIf="!isok" routerLinkActive='active-link'>
+                <a class="nav-link" routerLink="/login">Login</a>
+            </li>
+
+            <li class="nav-item" *ngIf="!isok" routerLinkActive='active-link'>
+                <a class="nav-link" routerLink="/register">Sign Up</a>
+            </li>
+             <li class="nav-item" *ngIf="isok || iscustomer">
+                <a style="cursor: pointer;" class="nav-link" (click)="logout()">Log out</a>
+            </li>
+            
+        </ul>
+    </div>
+</nav>
+<!-- Nav bar ends here -->

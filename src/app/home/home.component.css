@@ -1,0 +1,37 @@
+.cr {
+    width: 100%!important;
+    height: 250px;
+    padding-top: 2px;
+    padding-bottom: 5px;
+  
+  }
+  hr {
+    width:12%;
+    border-top: 3px solid rgb(1 175 240);
+    margin: 0px auto 0px auto;
+    border-style: dotted;
+  }
+  
+  .cen {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    /* background-image:url(/media/19289/bg_silder_o.jpg) */
+    background-image:url('https://www.hormuud.com/media/19288/midlemi.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    /* opacity: 0.1; */
+  }
+  h1 {
+  
+    color: #0db4e7;
+  }
+  
+  img {
+    width: 500px;
+  
+  }
+
+  
+
+  
+  

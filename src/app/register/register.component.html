@@ -1,0 +1,65 @@
+<div class="container">
+    <div>
+        <p>{{messages}}</p>
+    </div>
+    <form  [formGroup]="taskForm"  (ngSubmit)="register()">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="inputEmail4">Customer Name</label>
+                    <input type="text" class="form-control" name="name" id="inputEmail4" placeholder="customer name" ngModel formControlName="name">
+                    <span class="text-danger" *ngIf="isSubmitted && taskForm.get('name')?.hasError('required')">customer name required </span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="inputEmail4">Phone</label>
+                    <input type="number" class="form-control"  id="inputEmail4" placeholder="phone" formControlName="phone">
+                    <span class="text-danger" *ngIf="isSubmitted && taskForm.get('phone')?.hasError('required')">phone  required </span>
+                </div>
+            </div>
+        </div>
+        
+         <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="inputEmail4">Country</label>
+                    <select #mycountry id="co" class="form-control"   (change)='oncountrySelected(mycountry.value)' formControlName="country">
+                        <option selected value="">select country</option>
+                        <option *ngFor="let country of allCountries.data" value="{{country.countryid}}">{{country.countryname}}</option>
+                      </select>
+                      <span class="text-danger" *ngIf="isSubmitted && taskForm.get('country')?.hasError('required')">select country  </span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="inputEmail4">State</label>
+                    <select #mystate class="form-control"  (change)="oncountrystate(mystate.value)"  formControlName="state">
+                        <option selected value="">select state</option>
+                        <option *ngFor="let state of states.data" value="{{state.stateid}}">{{state.statename}}</option>
+                      </select>
+                      <span class="text-danger" *ngIf="isSubmitted && taskForm.get('state')?.hasError('required')">select state </span>
+                </div>
+            </div>
+        </div>
+         <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="inputEmail4">City</label>
+                    <select #mycity id="city" class="form-control"   formControlName="city">
+                        <option selected value="">select city</option>
+                        <option *ngFor="let city of cities.data" value="{{city.cityid}}">{{city.cityname}}</option>
+                      </select>
+                      <span class="text-danger" *ngIf="isSubmitted && taskForm.get('city')?.hasError('required')">select city </span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="inputEmail4"></label>
+                </div>
+            </div>
+        </div>
+           <br>
+         <button type="submit" class="btn btn-primary">Sign in</button>
+  </form>
+</div><br><br>

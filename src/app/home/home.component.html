@@ -1,0 +1,91 @@
+
+          <!-- Header start -->
+      
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 my-5 mb-3">
+                                <div class="sub-header">
+                                    <h1>Faster & Secure Way Money Transfer</h1>
+                                    <p class="text-muted para-dec">There are many variations of passages of Lorem Ipsum
+                                        available but the majority
+                                        have
+                                        suffered alteration in some form.</p>
+                                    <button type="button" (click)="login()"  class="btn btn-outline-info" >Send Money</button>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="header-image">
+                                    <img src="https://referpro.club/static/media/header.9911b8de.png" alt="Header">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+ 
+        <!-- Header end -->
+<div class="container my-2">
+  <div class="row">
+    <div class="col-md-12 text-center my-3">
+      <h1 class="section-title">Ramittance </h1>
+      <hr>
+    </div>
+    <div class="row text-center">
+      <div class="col-md-4 my-3">
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Open this select menu</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+      <div class="col-md-4 my-3">
+        <label >dklffdk</label>
+        <select class="form-select" aria-label="Default select example">
+          <option selected>Open this select menu</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+    </div>
+    
+  </div>
+</div>
+  
+
+<!-- modal -->
+<div class="modal" tabindex="-1" id="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="customerForm" (ngSubmit)="checkCustomer()">
+      <div class="modal-body">
+        <!-- start body -->
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>you phone</label>
+                <input type="phone" placeholder="phone" class="form-control" formControlName="phone">
+                <span class="text-danger" *ngIf="isSubmitted && customerForm.get('phone')?.hasError('required')">phone required </span>
+              </div>
+            </div><br>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>password</label>
+                <input type="password" placeholder="password" class="form-control" formControlName="password">
+                <span class="text-danger" *ngIf="isSubmitted && customerForm.get('password')?.hasError('required')">password required </span>
+              </div>
+            </div>
+          </div>
+          <!--  end body -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">login</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
