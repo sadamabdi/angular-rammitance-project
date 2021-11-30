@@ -14,7 +14,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="inputEmail4">Phone</label>
-                    <input type="number" class="form-control"  id="inputEmail4" placeholder="phone" formControlName="phone">
+                    <input type="number" class="form-control" min="0"  id="inputEmail4" placeholder="phone" formControlName="phone">
                     <span class="text-danger" *ngIf="isSubmitted && taskForm.get('phone')?.hasError('required')">phone  required </span>
                 </div>
             </div>
@@ -55,7 +55,9 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="inputEmail4"></label>
+                    <label for="inputEmail4">password</label>
+                    <input type="text" class="form-control" name="password" id="inputEmail4" placeholder="customer name"  formControlName="password">
+                    <span class="text-danger" *ngIf="isSubmitted && taskForm.get('password')?.hasError('required')">password required </span>
                 </div>
             </div>
         </div>

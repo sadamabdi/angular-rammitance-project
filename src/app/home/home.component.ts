@@ -20,7 +20,12 @@ export class HomeComponent implements OnInit {
   }
 
   login(){
+    if (this.authservice.iscusomerlog()) {
+      this.router.navigateByUrl('/sendmoney')
+      
+    }else{
     $("#modal").modal('show')
+    }
   }
 
   formValidate(){

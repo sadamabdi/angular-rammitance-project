@@ -75,6 +75,7 @@ export class AllusersComponent implements OnInit {
       this.apiServices.getByUrls('http://localhost:3000/v/user/delete/'+user.userid)
       .then(result => {
         console.log(result);
+        this.allUsersInfo()
         
       }).catch(error =>{
         $("#response").html(`
@@ -90,7 +91,7 @@ export class AllusersComponent implements OnInit {
    var action =  $("#action").val();
   this.isSubmitted = true;
   if (this.userForm.valid){
-   var url = action == 'add'?'':'http://localhost:3000/v/user/update/'
+   var url = action == 'add'?'http://localhost:3000/v/user/create/':'http://localhost:3000/v/user/update/'
    this.sendData(url,this.userForm.value)  
   }    
   }
@@ -99,6 +100,7 @@ export class AllusersComponent implements OnInit {
     this.apiServices.postByUrls(url,data)
     .then(result => {
       console.log(result);
+      this.allUsersInfo()
       
     }).catch(error => {
       alert(error.error)

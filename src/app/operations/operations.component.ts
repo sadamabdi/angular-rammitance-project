@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../shared/api.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-operations',
@@ -16,9 +17,13 @@ Allcities: any =[]
 ifError: boolean = false;
 errorMessage: any
 isloading: boolean = true
-  constructor(private apiServices: ApiService, private route: Router) { }
+  constructor(private apiServices: ApiService, private route: Router,private authService: AuthService) { }
 
   ngOnInit(): void {
+    if (!this.authService.isLoggedIn()) {
+      this.route.navigateByUrl('/')
+      return;
+    }
     // get all countries
     this.apiServices.getByUrls('http://localhost:3000/v/oper/getcounties')
     .then(result => {

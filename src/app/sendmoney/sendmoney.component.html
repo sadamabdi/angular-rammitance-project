@@ -1,13 +1,19 @@
+<div style="float: right;margin: 10px;">
+    <!-- <button class="btn btn-success" (click)="getTransaction()">View Transactions</button> -->
+    <button class="btn btn-primary" (click)="getTransaction()">
+        <span class="spinner-border spinner-border-sm" role="status" *ngIf="spinner" aria-hidden="true"></span>
+        View Transactions
+      </button>
+    {{customerName}}  <button type="button" class="btn btn-link" (click)="logoutcustomer()">Log out</button>
+</div><br><br>
 <div class="container my-4">
-    <div style="float: right;margin: 10px;">
-        <a href="#">Log out</a> {{customerName}}
-    </div><br><br>
-    <form>
+    <form [formGroup]="sendMoneyForm" (ngSubmit)="senMoney()">
+        <input type="text" hidden formControlName="sendercus">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-10">
             <div class="form-group">
                 <label>select Reciever Customer</label>
-                <select name="rec" id="rec" class="form-control" #myreciever (change)="getRecieverinfo(myreciever.value)">
+                <select name="rec" id="rec" class="form-control" #myreciever (change)="getRecieverinfo(myreciever.value)" formControlName="reciever">
                     <option value="">Reciever customer</option>
                     <option *ngFor="let customer of RecieverUser.data" value="{{customer.customerid}}">{{customer.customername}}</option>
                 </select>
@@ -19,17 +25,85 @@
         <div class="col-md-5">
             <div class="form-group">
                 <label>Amount in USD</label>
-               <input type="number" class="form-control" placeholder="Amount in USD" (keyup)="onKey($event)" formControlName="amount">
+               <input type="number" min="1" class="form-control" placeholder="Amount in USD" (keyup)="onKey($event)" formControlName="amount">
             </div>
         </div>
         <div class="col-md-5">
             <label>Converted Amount</label>
             <div class="input-group mb-3">
-                <input type="number" id="convertamount" class="form-control"  aria-label="Amount (to the nearest dollar)" formControlName="convertedamoun">
-                <span class="input-group-text" id="c_code">USD</span><span class="input-group-text text-primary" id="charge">0.0</span>
+                <input type="number" id="convertamount" class="form-control"  aria-label="Amount (to the nearest dollar)" formControlName="convertedamount">
+                <span class="input-group-text">{{currencyCode}}</span><span class="input-group-text text-primary" >{{charge}}</span>
               </div>
+              <input type="text" hidden formControlName="chargeamount">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group">
+                <label>Payment Type</label>
+                <select name="payment" id="pay" class="form-control" formControlName="payment">
+                    <option value="">select customer</option>
+                    <option *ngFor="let payment of payment.data" value="{{payment.paymentid}}">{{payment.paymenttype}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label>Payment Status</label>
+                <select name="rec" id="rec" class="form-control" formControlName="status">
+                    <option value="">Reciever customer</option>
+                    <option *ngFor="let status of status.data" value="{{status.statusid}}">{{status.statusname}}</option>
+                </select>
+            </div>
+        </div>
+        
+    </div><br>
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-info btn-block">Send</button>
         </div>
     </div>
     </form>
     
 </div>
+
+<div class="modal" tabindex="-1" id="modal">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- start body -->
+           <table class="table">
+               <tr>
+                   <th>Sender</th>
+                   <th>Reciever</th>
+                   <th>Amount</th>
+                   <th>Converted Amount</th>
+                   <th>Charge</th>
+                   <th>payment type</th>
+                   <th>status name</th>
+                   <th>Date</th>
+               </tr>
+               <tr *ngFor="let tran of transactions.data">
+                   <td>{{tran.sendername}}</td>
+                   <td>{{tran.recievername}}</td>
+                   <td>{{tran.amount}}</td>
+                   <td>{{tran.convertamount}}</td>
+                   <td>{{tran.charge}}</td>
+                   <td>{{tran.paymenttype}}</td>
+                   <td>{{tran.statusname}}</td>
+                   <td>{{tran.remittnacedate}}</td>
+               </tr>
+           </table>
+            <!--  end body -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">login</button>
+        </div>
+      </div>
+    </div>
+  </div>

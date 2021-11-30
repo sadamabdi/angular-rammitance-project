@@ -24,7 +24,8 @@ export class RegisterComponent implements OnInit {
       phone :['',Validators.required],
       country: ['', Validators.required],
       state: ['', Validators.required],
-      city: ['', Validators.required]
+      city: ['', Validators.required],
+      password: ['',Validators.required]
     })
     
 
@@ -42,12 +43,9 @@ export class RegisterComponent implements OnInit {
   register(){
     this.isSubmitted = true
     if (this.taskForm.valid){
-      console.log('isma');
-      console.log(this.taskForm.value);
       this.apiServices.postByUrls('http://localhost:3000/v/cus/register',this.taskForm.value).
     then(result => {
-      console.log(result)
-      this.messages = result;
+      this.messages = result.status;
     }).catch((error) => console.log(error));
     }   
   }
